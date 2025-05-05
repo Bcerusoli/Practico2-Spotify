@@ -20,11 +20,11 @@ exports.postCancionCreate = async (req, res) => {
     try {
         const { title, albumId } = req.body;
 
-       
+       //verifico si se envio el archivo
         if (!req.files || !req.files.audioFile) {
             return res.status(400).send({ message: "El archivo de audio es requerido." });
         }
-
+        //obtengo el archivo de audio
         const audioFile = req.files.audioFile;
 
         

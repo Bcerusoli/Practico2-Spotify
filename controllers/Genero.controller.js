@@ -6,14 +6,6 @@ exports.getGeneroList = async (req, res) => {
     res.send(generos);
 };
 
-exports.getGeneroById = async (req, res) => {
-    const { id } = req.params;
-    const genero = await db.Genero.findByPk(id);
-    if (!genero) {
-        return res.status(404).send({ message: 'Género no encontrado' });
-    }
-    res.send(genero);
-};
 
 exports.postGeneroCreate = async (req, res) => {
     try {
@@ -57,7 +49,7 @@ exports.putGeneroUpdate = async (req, res) => {
         return res.status(404).send({ message: "Género no encontrado" });
     }
 
-    
+    // Actualizar el nombre del género    
     genero.name = name;
 
     

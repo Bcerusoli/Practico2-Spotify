@@ -3,7 +3,7 @@ module.exports = app => {
     const controller = require("../controllers/Genero.controller.js");
 
     router.get("/", controller.getGeneroList);
-    router.get("/:id", controller.getGeneroById);
+   
     router.post("/", controller.postGeneroCreate);
     router.put("/:id", controller.putGeneroUpdate);
     router.delete("/:id", controller.deleteGenero);

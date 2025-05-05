@@ -9,10 +9,10 @@ exports.postAlbumCreate = async (req, res) => {
         if (!req.files || !req.files.coverImageFile) {
             return res.status(400).send({ message: "La imagen de portada es requerida." });
         }
-
+        // obtengo el archivo de imagen de portada
         const coverImageFile = req.files.coverImageFile;
 
-        
+        // construir la ruta de subida
         const uploadPath = path.join(__dirname, "../uploads", coverImageFile.name);
 
         
@@ -59,38 +59,7 @@ exports.getAlbumById = async (req, res) => {
 
 
 
-exports.postAlbumCreate = async (req, res) => {
-    try {
-        const { title, artistId } = req.body;
 
-       
-        if (!req.files || !req.files.coverImageFile) {
-            return res.status(400).send({ message: "La imagen de portada es requerida." });
-        }
-
-        const coverImageFile = req.files.coverImageFile;
-
-        
-        const uploadPath = path.join(__dirname, "../uploads", coverImageFile.name);
-
-       
-        coverImageFile.mv(uploadPath, async (err) => {
-            if (err) {
-                console.error("Error al mover el archivo:", err);
-                return res.status(500).send({ message: "Error al subir la imagen de portada.", error: err });
-            }
-
-           
-            const coverImageUrl = `/uploads/${coverImageFile.name}`;
-            const album = await db.Album.create({ title, coverImageUrl, artistId });
-
-            res.status(201).send(album);
-        });
-    } catch (error) {
-        console.error("Error al crear el álbum:", error);
-        res.status(500).send({ message: "Error al crear el álbum." });
-    }
-};
 
 exports.putAlbumUpdate = async (req, res) => {
     const { id } = req.params;
@@ -120,6 +89,8 @@ exports.putAlbumUpdate = async (req, res) => {
                 return res.status(500).send({ message: "Error al subir la imagen de portada.", error: err });
             }
         });
+
+        //
 
         
         album.coverImageUrl = `/uploads/${coverImageFile.name}`;

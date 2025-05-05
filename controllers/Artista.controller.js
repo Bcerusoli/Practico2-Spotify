@@ -27,7 +27,7 @@ exports.postArtistaCreate = async (req, res) => {
     try {
         const { name, genreId } = req.body;
 
-        
+        //Verifico si se envio el archivo
         if (!req.files || !req.files.photoFile) {
             console.log("Archivos recibidos:", req.files); 
             return res.status(400).send({ message: "La foto es requerida." });
